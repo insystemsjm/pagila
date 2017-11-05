@@ -1,0 +1,44 @@
+group 'nl.qb.pagila'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-docker-plugin:3.2.0'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.bmuschko.docker-remote-api'
+
+sourceCompatibility = 1.8
+
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+dependencies {
+    compile project(':distributie-docker:docker-pagila-database')
+}
+
+docker {
+    url = "unix:///var/run/docker.sock"
+}
+
+task copyWarFile(type: Copy) {
+    from project(':pagila-delivery:pagila-delivery-ws').file('build/libs/')
+    into file('build/resources/main')
+}
+
+task buildPagilaDeliveryImage(type: DockerBuildImage) {
+    dependsOn copyWarFile
+    inputDir = file('build/resources/main')
+    tag = 'tomcat/dvdrental:latest'
+}
+
+
+
+
+

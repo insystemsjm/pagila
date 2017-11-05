@@ -1,0 +1,59 @@
+group 'nl.qb.pagila'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
+    }
+}
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'com.bmuschko.tomcat'
+
+dependencies {
+    def tomcatVersion = '7.0.59'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+}
+
+tomcatRun {
+    httpPort = 8080
+    stopPort = 8191
+    httpsPort = 8091
+    enableSSL = true
+}
+tomcatRunWar{
+    contextPath = ''
+    httpPort = 8080
+    stopPort = 8191
+}
+
+dependencies {
+    compile project(':pagila-delivery:pagila-delivery-dataaccess')
+    compile project(':pagila-service:pagila-service-dataaccess-api')
+    compile project(':pagila-service:pagila-service-rental')
+    compile project(':pagila-domain:pagila-domain-dto')
+
+
+    compile 'javax.inject:javax.inject'
+    compile 'org.springframework:spring-web'
+    compile 'org.apache.cxf:cxf-rt-frontend-jaxrs'
+    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider'
+
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

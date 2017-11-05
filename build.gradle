@@ -1,0 +1,84 @@
+group 'nl.qb.pagila'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+    }
+}
+
+subprojects {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    apply plugin: 'io.spring.dependency-management'
+
+    ext {
+        javax_version = '1'
+        javax_servlet_version = '1'
+        spring_version = '4.3.6.RELEASE'
+        spring_data_version = '1.7.2.RELEASE'
+        hibernate_version = '4.3.11.Final'
+        hibernate_jpa_version = '1.0.0.Final'
+        commons_dbcp_version = '1.4'
+        commons_lang3_version = '3.0'
+        commons_io_version = '2.5'
+        junit_version = '4.12'
+        hsqldb_version = '2.4.0'
+        dbunit_version = '2.5.1'
+        guava_version = '22.0'
+        postgresql_version = '42.1.3'
+        slf4j_version = '1.7.22'
+        jackson_core_version = '2.9.0'
+        xmlunit_version = '1.6'
+        jbehave_version = '4.1.2'
+        apache_cxf_version = '3.1.12'
+    }
+
+    dependencyManagement {
+        dependencies {
+            dependency "javax.inject:javax.inject:$javax_version"
+            dependency "javax.persistence:javax.persistence:$javax_version"
+            dependency "javax.servlet:javax.servlet-api:$javax_servlet_version"
+
+            //hibernate
+            dependency "org.hibernate:hibernate-core:$hibernate_version"
+            dependency "org.hibernate:hibernate-entitymanager:$hibernate_version"
+            dependency "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:$hibernate_jpa_version"
+
+            //spring
+            dependency "org.springframework:spring-core:$spring_version"
+            dependency "org.springframework:spring-tx:$spring_version"
+            dependency "org.springframework:spring-context:$spring_version"
+            dependency "org.springframework:spring-web:$spring_version"
+            dependency "org.springframework:spring-jdbc:$spring_version"
+            dependency "org.springframework:spring-orm:$spring_version"
+            dependency "org.springframework:spring-aop:$spring_version"
+            dependency "org.springframework:spring-test:$spring_version"
+            dependency "org.springframework.data:spring-data-jpa:$spring_data_version"
+
+            dependency "org.apache.cxf:cxf-rt-frontend-jaxrs:$apache_cxf_version"
+            dependency "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:$jackson_core_version"
+            dependency "commons-dbcp:commons-dbcp:$commons_dbcp_version"
+            dependency "com.google.guava:guava:$guava_version"
+            dependency "org.slf4j:slf4j-api:$slf4j_version"
+            dependency "xmlunit:xmlunit:$xmlunit_version"
+            dependency "org.postgresql:postgresql:$postgresql_version"
+            dependency "com.fasterxml.jackson.core:jackson-databind:$jackson_core_version"
+            dependency "org.apache.commons:commons-lang3:$commons_lang3_version"
+            dependency "commons-io:commons-io:$commons_io_version"
+
+            //test related
+            dependency "org.dbunit:dbunit:$dbunit_version"
+            dependency "junit:junit:$junit_version"
+            dependency "org.hsqldb:hsqldb:$hsqldb_version"
+            dependency "org.jbehave:jbehave-spring:$jbehave_version"
+        }
+    }
+}

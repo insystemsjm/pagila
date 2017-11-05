@@ -1,0 +1,16 @@
+group 'nl.qb.pagila'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':pagila-domain:pagila-domain-enumeration')
+
+    compile 'org.hibernate:hibernate-core'
+    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
+    compile 'org.springframework:spring-core'
+}

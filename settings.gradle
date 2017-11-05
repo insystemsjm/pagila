@@ -1,0 +1,26 @@
+rootProject.name = 'pagila'
+//common
+include 'pagila-common'
+include 'pagila-common:pagila-common-test-dal'
+//db
+include 'pagila-database'
+//domain
+include 'pagila-domain'
+include 'pagila-domain:pagila-domain-dto'
+include 'pagila-domain:pagila-domain-entity'
+include 'pagila-domain:pagila-domain-enumeration'
+//delivery
+include 'pagila-delivery'
+include 'pagila-delivery:pagila-delivery-dataaccess'
+include 'pagila-delivery:pagila-delivery-ws'
+//service
+include 'pagila-service'
+include 'pagila-service:pagila-service-rental'
+include 'pagila-service:pagila-service-dataaccess-api'
+//docker distr
+include 'distributie-docker'
+include 'distributie-docker:docker-pagila-database'
+include 'distributie-docker:docker-pagila-tomcat'
+//testtooling
+include 'pagila-testtool-e2e'
+

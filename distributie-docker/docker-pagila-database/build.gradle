@@ -1,0 +1,36 @@
+group 'nl.qb.pagila'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-docker-plugin:3.2.0'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.bmuschko.docker-remote-api'
+
+docker {
+    url = "unix:///var/run/docker.sock"
+}
+
+sourceCompatibility = 1.8
+
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+task copySqlFiles(type: Copy) {
+    from project(':pagila-database').file('build/resources/main/pagila/postgres')
+    into file('build/resources/main')
+}
+
+task buildPagilaDbImage(type: DockerBuildImage) {
+    dependsOn copySqlFiles
+    inputDir = file('build/resources/main')
+    tag = 'postgres/dvdrental:latest'
+}
+

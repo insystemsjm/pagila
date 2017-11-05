@@ -1,0 +1,14 @@
+group 'nl.qb.pagila'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':pagila-domain:pagila-domain-entity')
+
+    compile 'com.fasterxml.jackson.core:jackson-databind'
+}

@@ -1,0 +1,32 @@
+group 'nl.qb.pagila'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':pagila-common:pagila-common-test-dal')
+    compile project(':pagila-domain:pagila-domain-entity')
+    compile project(':pagila-service:pagila-service-dataaccess-api')
+
+    compile 'javax.inject:javax.inject'
+    compile 'org.hibernate:hibernate-core'
+    compile 'org.hibernate:hibernate-entitymanager'
+    compile 'org.springframework:spring-tx'
+    compile 'org.springframework:spring-context'
+    compile 'org.springframework:spring-web'
+    compile 'org.springframework.data:spring-data-jpa'
+    compile 'org.springframework:spring-jdbc'
+    compile 'org.springframework:spring-orm'
+    compile 'commons-dbcp:commons-dbcp'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'org.dbunit:dbunit'
+    testCompile 'org.hsqldb:hsqldb'
+    testCompile 'org.springframework:spring-test'
+}
